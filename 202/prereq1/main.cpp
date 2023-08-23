@@ -2,24 +2,25 @@
 
 using namespace std;
 
-double largestNum(double, double, double); // note no var names
+double largestNum(double, double, double);
 
 int main() {
     double val1 = 0;
     double val2 = 0;
     double val3 = 0;
     cin >> val1 >> val2 >> val3;
-    cout << "Largest: ";
+    cout << "largest: ";
     cout << largestNum(val1, val2, val3);
     cout << endl;
 }
 
 double largestNum(double a, double b, double c) {
-  if ( a > b && a > c) {
+    if (a > b && a > c) {
         return a;
-    } else if (b > c) {
+    }
+    else if (b > c) {
         return b;
     }
-    // else
+    //else
     return c;
 }
