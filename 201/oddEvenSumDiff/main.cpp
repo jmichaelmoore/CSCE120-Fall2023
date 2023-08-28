@@ -7,19 +7,19 @@ int main() {
     cin >> num;
     int cpy = num;
     int sum = 0;
-    int curDigit = 0;
+    int rightDigit = 0;
     while (num > 0) {
         int leftDigit = num%10; // get remainder with modulus
         if (leftDigit%2 == 0) {
-            sum += curDigit;
+            sum += rightDigit;
         }
         else {
-            sum -= curDigit;
+            sum -= rightDigit;
         }
         num /= 10;
-        curDigit = leftDigit;
+        rightDigit = leftDigit;
     }
-    sum += curDigit;
+    sum += rightDigit;
     
     cout << "sum of Digits for " << cpy << " is " << sum << endl;
 }
