@@ -20,5 +20,6 @@ int main() {
         rightdigit = leftdigit;
         num /= 10; // num = num / 10;
     }
+    sum += rightdigit;
     cout << "The sum of digits of " << cpy << " is " << sum << endl;
 }
