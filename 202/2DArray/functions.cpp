@@ -98,6 +98,13 @@ void loadImage(const string filename, Pixel image[MAX_WIDTH][MAX_HEIGHT],
   ifs >> maxColor;
 
   // read the color values into the 2D array in Column Major Order
+  for (unsigned int row = 0; row<height; ++row) {
+    for (unsigned int col = 0; col<width; ++col) {
+      ifs >> image[col][row].r;
+      ifs >> image[col][row].g;
+      ifs >> image[col][row].b;
+    }
+  }
 }
 
 /*  Function grayscale
@@ -111,6 +118,16 @@ void grayscaleImage(Pixel image[MAX_WIDTH][MAX_HEIGHT], unsigned int width, unsi
   cout << "Making grayscale image... " << endl;
   // iterate through 2d image of Pixels and convert them to grayscale
   // use opposite outer loop than load and output just to be different
+  for (unsigned int col = 0; col<width; ++col) {
+    for (unsigned int row = 0; row<height; ++row) {
+      unsigned int grey = 0;
+      grey += image[col][row].r;
+      grey += image[col][row].g;
+      grey += image[col][row].b;
+      grey /= 3;
+      image[col][row] = {grey, grey, grey};
+    }
+  }
 }
 
 /*  Function sepiaImage
@@ -167,6 +184,15 @@ void outputImage(const string filename, const Pixel image[MAX_WIDTH][MAX_HEIGHT]
   ofs << 255 << endl;
 
   // output from column major order array into row major PPM file
+  for (unsigned int row = 0; row<height; ++row) {
+    for (unsigned int col = 0; col<width; ++col) {
+      ofs << image[col][row].r << " ";
+      ofs << image[col][row].g << " ";
+      ofs << image[col][row].b << " ";
+    }
+    ofs << endl;
+  }
+
 }
 
 /*  Function printMenu
