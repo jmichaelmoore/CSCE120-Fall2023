@@ -18,29 +18,35 @@ void insert(int val, unsigned int index,
   // assume size index <= size
   // assume size < capacity
   // slide values over
-  for (int i = index; i < size; ++i) {
+  for (unsigned int i = 0; i < size-index; ++i) {
     // slide number
-    ary[size-1-i+1] = ary[size-1-i];
+    ary[size-i] = ary[size-i-1];
   }
+  ary[index] = val;
 }
 
 void removeAtIndex(unsigned int index, 
           int ary[], unsigned int size) {
+  // do on your own
 }
 
 void removeFirstOf(int val, 
           int ary[], unsigned int size) {
+  // do on your own
 }
 
 int getMax(const int ary[], unsigned int size) {
+  // do on your own
   return 0;
 }
 
 int getMin(const int ary[], unsigned int size) {
+  // do on your own
   return 0;
 }
 
 unsigned int countVal(int val, const int ary[], unsigned int size) {
+  // do on your own
   return 0;
 }
 
