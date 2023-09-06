@@ -20,6 +20,7 @@ void insert(int val, unsigned int index,
   for (unsigned int i=0; i<(size-index); ++i) {
     ary[size-i] = ary[size-i-1];
   }
+  ary[index] = val;
 }
 
 void removeAtIndex(unsigned int index, 
@@ -31,7 +32,13 @@ void removeFirstOf(int val,
 }
 
 int getMax(const int ary[], unsigned int size) {
-  return 0;
+  int max = ary[0];
+  for (unsigned int i=1; i<size; ++i) {
+    if (ary[i] > max) {
+      max = ary[i];
+    }
+  }
+  return max;
 }
 
 int getMin(const int ary[], unsigned int size) {
