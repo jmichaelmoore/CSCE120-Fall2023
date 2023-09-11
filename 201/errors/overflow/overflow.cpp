@@ -11,5 +11,5 @@ int main() {
         cin >> a >> b;
         short answer = a + b;
         cout << a << " + " << b << " is " << answer << endl;
-    } while (a >=0 && b >=0);
+    } while (a >=0 || b >=0);
 }
