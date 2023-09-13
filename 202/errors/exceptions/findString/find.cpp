@@ -11,8 +11,14 @@ int main() {
         cout << "Enter string to find: ";
         cin >> strToFind;
         size_t location = 0; // size_t is an alias for unsigned int
-        paragraph.find(strToFind);
+        location = paragraph.find(strToFind);
         // use find function
-        cout << strToFind << " starts at index " << location << endl;
+        // update to give meaningful message when not found
+        if (location == string::npos) {
+            cout << strToFind << " is not in the paragraph" << endl;
+        }
+        else {
+            cout << strToFind << " starts at index " << location << endl;
+        }
     } while (strToFind != ".");
 }
