@@ -46,6 +46,9 @@ int main() {
       catch (out_of_range &e) {
         cout << e.what() << endl;
       }
+      catch (std::invalid_argument &e) {
+        cout << e.what() << endl;
+      }
       // we'll let the function update size later when we learn more about pass by reference!
       break;
     case 'R':

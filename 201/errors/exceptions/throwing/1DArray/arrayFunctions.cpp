@@ -16,7 +16,13 @@ void loadRandom(int ary[], int size) {
 void insert(int val, unsigned int index, 
           int ary[], unsigned int size) {
   // assume size index <= size
+  if (index > size) {
+    throw q("index is too big");
+  }
   // assume size < capacity
+  if (size >= CAPACITY) {
+    throw std::invalid_argument("no space for a new value");
+  }
   // slide values over
   for (unsigned int i = 0; i < size-index; ++i) {
     // slide number

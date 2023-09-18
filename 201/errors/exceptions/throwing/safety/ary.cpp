@@ -5,10 +5,15 @@ using std::cin, std::cout, std::endl;
 void doubleVal(unsigned int ary[], unsigned int size, unsigned int max) {
     // throw an exception if any value becomes larger than max
     for (unsigned int i = 0; i < size; ++i) {
-        ary[i] *= 2;
-        if (ary[i] > max) {
+        if (ary[i]*2 > max) {
             // throw exception
+            std::string errMsg;
+            errMsg = "Creates a value that is too big (" + std::to_string(ary[i]*2) + ") at index " + std::to_string(i);
+            throw std::runtime_error(errMsg);
         }
+    }
+    for (unsigned int i = 0; i < size; ++i) {
+        ary[i] *= 2;
     }
 }
 
@@ -24,7 +29,12 @@ int main() {
     unsigned int ary[size] = {1, 2, 3, 4, 5};
     cout << "ary before doubleVal: " << endl;
     printAry(ary, size);
-    doubleVal(ary, size, 6);
+    try {
+        doubleVal(ary, size, 6);
+    }
+    catch (std::runtime_error &e) {
+        cout << e.what() << endl;
+    }
     cout << "ary after doubleVal: " << endl;
     printAry(ary, size);
 }
