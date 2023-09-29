@@ -6,6 +6,38 @@
 using std::cin, std::cout, std::cerr, std::endl, std::string;
 using std::istringstream, std::ifstream, std::ofstream;
 
+string tolower(string wd) {
+	for (unsigned int i=0; i<wd.length(); ++i) {
+		wd.at(i) = tolower(wd.at(i));
+	}	
+	return wd;
+}
+
+string getReplace(string wd) {
+	string retWd;
+	for (unsigned int i=0; i<wd.length(); ++i) {
+		char replacement = random()%5;
+		switch (replacement) {
+			case 0:
+				retWd += '$';
+				break;
+			case 1:
+				retWd += '*';
+				break;
+			case 2: 
+				retWd += '%';
+				break;
+			case 3:
+				retWd += '@';
+				break;
+			case 4: 
+				retWd += '!';
+				break;
+		}
+	}
+	return retWd;
+}
+
 int main() {
 	// Get filenames - For now we will hard code the names
 	string censorWordsFilename = "censorwords.txt";
@@ -35,7 +67,7 @@ int main() {
 	string censorWds;
 	string censorWd;
 	while(censorWdsIn >> censorWd) {
-		censorWds = censorWds + censorWd + " ";
+		censorWds = tolower(censorWds) + censorWd + " ";
 	}
 
 	// print out list of censored words (for debugging) remove later from final program
@@ -50,13 +82,22 @@ int main() {
 	while (!originalIn.eof()) {
 		string line;
 		getline(originalIn, line);
+		string linelower = tolower(line);
 		istringstream cwds(censorWds);
 		string wd;
+		//cout << "npos: " << string::npos << endl;
 		while (cwds >> wd) {
-			unsigned int location = 0;
+			cout << "wd: " << wd << endl;
+			size_t location = 0;
+			size_t startlocation = 0;
 			do {
-				location = line.find(wd);
+				location = linelower.find(wd, startlocation);
+				cout << "location: " << location << endl;
 				//start here!!!!
+				if (location != string::npos) {
+					line.replace(location, wd.size(), getReplace(wd));
+					startlocation = location + wd.length();
+				}
 			} while (location != string::npos);
 		}
 		censorOut << line;
