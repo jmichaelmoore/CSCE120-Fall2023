@@ -4,7 +4,7 @@ using std::cout, std::endl;
 
 int main() {
     int i = 100;
-    int& k = 50; // make into a reference
+    int& k = i; // make into a reference
     cout << "original values" << endl;
     cout << "i: " << i << endl;
     cout << "k: " << k << endl;
