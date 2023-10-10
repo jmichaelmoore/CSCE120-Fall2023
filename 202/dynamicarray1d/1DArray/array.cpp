@@ -12,8 +12,10 @@ void printMenu();
 //     before we can do that.
 int main() {
   srand(time(NULL));
-  
-  int ary[CAPACITY] = {0};
+  cout << "enter capacity: ";
+  unsigned int capacity = 0;
+  cin >> capacity;
+  int* ary = new int[capacity];
   unsigned int size = 0;
   
   char menuChoice = ' ';
@@ -32,7 +34,7 @@ int main() {
     case 'L':
       cout << "Input number of random values to load: ";
       cin >> size;
-      loadRandom(ary, size);
+      loadRandom(ary, size, capacity);
       break;
     case 'I':
       cout << "Input value to insert: ";

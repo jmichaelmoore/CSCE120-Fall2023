@@ -12,9 +12,14 @@ void printMenu();
 //     before we can do that.
 int main() {
   srand(time(NULL));
-  
-  int ary[CAPACITY] = {0};
+
+  unsigned int capacity = 0;
+  cout << "enter capacity: ";
+  cin >> capacity;
+  int* ary = new int[capacity];
+
   unsigned int size = 0;
+  
   
   char menuChoice = ' ';
   
