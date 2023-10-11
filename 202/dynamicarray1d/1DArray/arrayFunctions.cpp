@@ -7,13 +7,15 @@ using std::out_of_range;
 
 // always throw an out_of_range exception for any invalid index
 
-void loadRandom(int ary[], int size, int capacity) {
+// creates a new array
+void loadRandom(int*& ary, int size, int& capacity) {
   if (size == 0) {
     throw std::invalid_argument("array size cannot be zero");
   }
   if (size > capacity) {
-    throw std::invalid_argument("array size cannot be greater than capacity");
+    capacity = size*2;
   }
+  ary = new int[capacity];
   for (int i=0; i<size; ++i) {
     ary[i] = rand()%1000;
   }

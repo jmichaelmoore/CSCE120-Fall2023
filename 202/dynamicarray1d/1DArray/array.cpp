@@ -15,7 +15,7 @@ int main() {
   cout << "enter capacity: ";
   unsigned int capacity = 0;
   cin >> capacity;
-  int* ary = new int[capacity];
+  int* ary = nullptr;
   unsigned int size = 0;
   
   char menuChoice = ' ';
