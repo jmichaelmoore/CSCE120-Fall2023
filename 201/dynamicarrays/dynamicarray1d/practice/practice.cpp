@@ -10,7 +10,7 @@ int main() {
 
   unsigned int size = 0;
 
-  cout << "size: ";
+  cout << "enter size: ";
   cin >> size;
 
   char* ary = nullptr;
@@ -19,6 +19,7 @@ int main() {
   makeary(ary, size);
 
   // load ary
+  cout << "enter " << size << " characters: ";
   loadary(cin, ary, size);
 
   // print ary
