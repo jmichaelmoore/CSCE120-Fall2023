@@ -10,20 +10,31 @@ int main() {
   cout << "How many values will you enter?";
   unsigned int size = 0;
   cin >> size;
-  if (size == 0) {
-    cout << "You must enter at least one value." << endl;
+  if (cin.fail() || size == 0) {
+    cout << "You must enter a valid size greater than zero." << endl;
     return 1; // empty array so nothing to read into
   }
   
   // define pointer to appropriate datatype (double)
   // allocate memory for the array with "new"
+  double* ary = new double[size];
   // initialize
+  for (unsigned int i=0; i<size; ++i) {
+    ary[i] = 0;
+  }
   // use the array - same as using an array on the heap
+  for (unsigned int i=0; i<size; ++i) {
+    cin >> ary[i]; // do this
+    //cin >> *(ary + i); // don't do this
+    //cin >> i[ary]; // don't do this
+  }
+
   cout << "The max is: " << max(ary, size) << endl; // add call to max
   cout << "Numbers: " << endl;
   printAry(ary, size);
   cout << endl;
   // release memory for the array with "delete[]"
+  delete[] ary;
 }
 
 double max(double nums[], unsigned int size) {

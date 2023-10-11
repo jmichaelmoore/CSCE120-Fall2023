@@ -2,7 +2,7 @@
 #ifndef ARRAYFUNCTIONS_H
 #define ARRAYFUNCTIONS_H
 
-const unsigned int CAPACITY = 100; // make largest size we will ever need
+//const unsigned int CAPACITY = 100; // make largest size we will ever need
 
 // functions to add
 // loadRandom
