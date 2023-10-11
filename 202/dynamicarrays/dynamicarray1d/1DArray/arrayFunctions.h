@@ -15,11 +15,11 @@
 // print
 
 void print(const int ary[], unsigned int size);
-void loadRandom(int*& ary, int size, int& capacity);
+void loadRandom(int*& ary, unsigned int size, unsigned int& capacity);
 void insert(int val, unsigned int index, 
-          int ary[], unsigned int size);
+          int ary[], unsigned int& size, unsigned int capacity);
 void removeAtIndex(unsigned int index, 
-          int ary[], unsigned int size);
+          int ary[], unsigned int& size);
 void removeFirstOf(int val, 
           int ary[], unsigned int size);
 int getMax(const int ary[], unsigned int size);

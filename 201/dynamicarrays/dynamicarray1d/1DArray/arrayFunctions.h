@@ -14,16 +14,16 @@
 // count val
 // print
 
-void print(const int ary[], unsigned int size);
-void loadRandom(int ary[], int size);
-void insert(int val, unsigned int index, 
-          int ary[], unsigned int size);
-void removeAtIndex(unsigned int index, 
-          int ary[], unsigned int size);
+void print(const int ary[], int size);
+void loadRandom(int*& ary, int size, int& capacity);
+void insert(int val, int index, 
+          int ary[], int& size, int capacity);
+void removeAtIndex(int index, 
+          int ary[], int& size);
 void removeFirstOf(int val, 
-          int ary[], unsigned int size);
-int getMax(const int ary[], unsigned int size);
-int getMin(const int ary[], unsigned int size);
-unsigned int countVal(int val, const int ary[], unsigned int size);
+          int ary[], int size);
+int getMax(const int ary[], int size);
+int getMin(const int ary[], int size);
+int countVal(int val, const int ary[], int size);
 
 #endif

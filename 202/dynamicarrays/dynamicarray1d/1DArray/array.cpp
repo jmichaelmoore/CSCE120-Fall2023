@@ -12,12 +12,11 @@ void printMenu();
 //     before we can do that.
 int main() {
   srand(time(NULL));
-  cout << "enter capacity: ";
-  unsigned int capacity = 0;
-  cin >> capacity;
-  int* ary = nullptr;
   unsigned int size = 0;
-  
+  unsigned int capacity = 0;
+  cout << "enter size: ";
+  cin >> size;
+  int* ary = nullptr;
   char menuChoice = ' ';
   
   while ('Q' != toupper(menuChoice)) {
@@ -42,8 +41,8 @@ int main() {
       cout << "Input index to insert: ";
       cin >> index;
       try {
-        insert(num, index, ary, size);
-        size++;
+        insert(num, index, ary, size, capacity);
+        //size++;
       }
       catch (out_of_range &e) {
         cout << e.what() << endl;
@@ -55,7 +54,7 @@ int main() {
       cin >> index;
       try {
         removeAtIndex(index, ary, size);
-        size--;
+        //size--;
       }
       catch (out_of_range &e) {
         cout << e.what() << endl;

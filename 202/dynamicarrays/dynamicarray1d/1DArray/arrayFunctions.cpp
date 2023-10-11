@@ -8,7 +8,7 @@ using std::out_of_range;
 // always throw an out_of_range exception for any invalid index
 
 // creates a new array
-void loadRandom(int*& ary, int size, int& capacity) {
+void loadRandom(int*& ary, unsigned int size, unsigned int& capacity) {
   if (size == 0) {
     throw std::invalid_argument("array size cannot be zero");
   }
@@ -16,13 +16,13 @@ void loadRandom(int*& ary, int size, int& capacity) {
     capacity = size*2;
   }
   ary = new int[capacity];
-  for (int i=0; i<size; ++i) {
+  for (unsigned int i=0; i<size; ++i) {
     ary[i] = rand()%1000;
   }
 }
 
 void insert(int val, unsigned int index, 
-          int ary[], unsigned int size) {
+          int ary[], unsigned int& size, unsigned int capacity) {
   // assume size index <= size
   if (size == 0) {
     throw std::invalid_argument("array size cannot be zero");
@@ -31,7 +31,7 @@ void insert(int val, unsigned int index,
     throw std::out_of_range("index is too big"); // we'll make this not necessary later
   }
   // assume size < capacity
-  if (size >= CAPACITY) {
+  if (size >= capacity) {
     throw std::invalid_argument("no space for a new value");
   }
   // slide values over
@@ -40,10 +40,11 @@ void insert(int val, unsigned int index,
     ary[size-i] = ary[size-i-1];
   }
   ary[index] = val;
+  size++;
 }
 
 void removeAtIndex(unsigned int index, 
-          int ary[], unsigned int size) {
+          int ary[], unsigned int& size) {
   if (size == 0) {
     throw std::invalid_argument("array size cannot be zero");
   }
@@ -53,6 +54,7 @@ void removeAtIndex(unsigned int index,
   for (unsigned int i=index; i<size-1; ++i) {
     ary[i] = ary[i+1];
   }
+  size--;
 }
 
 void removeFirstOf(int val, 

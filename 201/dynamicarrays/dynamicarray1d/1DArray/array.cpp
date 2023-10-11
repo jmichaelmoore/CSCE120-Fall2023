@@ -13,12 +13,11 @@ void printMenu();
 int main() {
   srand(time(NULL));
 
-  unsigned int capacity = 0;
-  cout << "enter capacity: ";
-  cin >> capacity;
-  int* ary = new int[capacity];
-
-  unsigned int size = 0;
+  int capacity = 0;
+  int size = 0;
+  cout << "enter size: ";
+  cin >> size;
+  int* ary = nullptr;
   
   
   char menuChoice = ' ';
@@ -37,7 +36,7 @@ int main() {
     case 'L':
       cout << "Input number of random values to load: ";
       cin >> size;
-      loadRandom(ary, size);
+      loadRandom(ary, size, capacity);
       break;
     case 'I':
       cout << "Input value to insert: ";
@@ -45,8 +44,8 @@ int main() {
       cout << "Input index to insert: ";
       cin >> index;
       try {
-        insert(num, index, ary, size);
-        size++;
+        insert(num, index, ary, size, capacity);
+        //size++;
       }
       catch (out_of_range &e) {
         cout << e.what() << endl;
@@ -58,7 +57,7 @@ int main() {
       cin >> index;
       try {
         removeAtIndex(index, ary, size);
-        size--;
+        //size--;
       }
       catch (out_of_range &e) {
         cout << e.what() << endl;
