@@ -16,6 +16,10 @@ int main() {
 
   // define a pointer to a pointer (char for this example)
   // allocate an array of pointers (column major)
+  char** letters = new char*[cols];
+  for (unsigned int col=0; col<cols; ++col) {
+    letters[col] = new char[rows];
+  }
   
   // initialize
   loadary(letters, rows, cols);
@@ -24,6 +28,13 @@ int main() {
   printary(letters, rows, cols);
 
   // release memory
+  for (unsigned int col=0; col<cols; ++col) {
+    delete [] letters[col];
+  }
+  delete [] letters;
+  letters = nullptr;
+  rows = 0;
+  cols = 0;
 }
 
 void loadary(char** ary, unsigned int rows, unsigned int cols) {
@@ -32,10 +43,10 @@ void loadary(char** ary, unsigned int rows, unsigned int cols) {
     for (unsigned int row=0; row<rows; row++) {
       char val;
       if (rand()%2) { // uppercase
-        val = rand()%26 + 65;
+        val = rand()%26 + 'A';
       }
       else { // lowercase
-        val = rand()%26 + 97;
+        val = rand()%26 + 'a';
       }
       ary[col][row] = val;
     }
