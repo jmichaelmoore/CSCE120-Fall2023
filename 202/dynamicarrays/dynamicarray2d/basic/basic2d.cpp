@@ -30,6 +30,7 @@ int main() {
   // release memory
   for (unsigned int col=0; col<cols; ++col) {
     delete [] letters[col];
+    letters[col] = nullptr;
   }
   delete [] letters;
   letters = nullptr;
@@ -43,10 +44,10 @@ void loadary(char** ary, unsigned int rows, unsigned int cols) {
     for (unsigned int row=0; row<rows; row++) {
       char val;
       if (rand()%2) { // uppercase
-        val = rand()%26 + 'A';
+        val = rand()%26 + 'a';
       }
       else { // lowercase
-        val = rand()%26 + 'a';
+        val = rand()%26 + 'A';
       }
       ary[col][row] = val;
     }
