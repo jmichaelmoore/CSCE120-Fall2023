@@ -4,33 +4,34 @@
 using namespace std;
 
 struct Pixel {
-    int r;
-    int g;
-    int b;
+    unsigned int r;
+    unsigned int g;
+    unsigned int b;
 };
 
-void mySwap(int a, int b) {
+void mySwap(unsigned int a, unsigned int b) {
 }
 
-int getMedian(int a, int b, int c) {
+unsigned int getMedian(unsigned int a, unsigned int b, unsigned int c) {
     // sort local copies
     // return middle value
     return b;
 }
 
-Pixel** makeImage(int width, int height) {
+Pixel** makeImage(unsigned int width, unsigned int height) {
+    // throw exception if we fail to allocate memory for the image.
     return nullptr;
 }
 
-// (ifstream, image, width, height)
+// (ifstream, image, width, height) allow images and width and height to be updated
 // we'll assume good input
-void loadImage(ifstream& ifs, Pixel** img, int width, int height) {
+void loadImage() {
     // get preamble data including width and height
     // allocate memory for the iamge based on width and height
 }
 
-// (ofstream, image, width, height)
-void outputImage(ofstream& ofs, const Pixel*const* img, int width, int height) {
+// (ofstream, image, width, height) // prevent changing array
+void outputImage() {
     ofs << "P3" << endl;
     ofs << width << " " << height << endl;
     ofs << 255 << endl;
@@ -55,7 +56,7 @@ int main() {
         ifstream file3("third.ppm");
         ofstream outFile("result.ppm");
         if (!file1.is_open() || !file2.is_open() || !file3.is_open() || !outFile.is_open()) {
-            cout << "Unable to open input files" << endl;
+            cout << "Unable to open files" << endl;
             return 1;
         }
 
@@ -63,16 +64,16 @@ int main() {
         Pixel** img2 = nullptr;
         Pixel** img3 = nullptr;
         Pixel** result = nullptr;
-        int width = -1;
-        int height = -1;
-        int loadWidth = -1;
-        int loadHeight = -1;
+        unsigned int width = 0;
+        unsigned int height = 0;
+        unsigned int loadWidth = 0; // set to parameters of first image and ensure other images match
+        unsigned int loadHeight = 0;
 
         // Load & create 2D arrays
 
         // Make result image
 
-        // Process that pesky tourist
+        // Process out that pesky tourist
 
         // output result image
         outputImage(outFile, result, width, height);
