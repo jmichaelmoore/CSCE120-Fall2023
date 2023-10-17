@@ -9,34 +9,62 @@ struct Pixel {
     unsigned int b;
 };
 
-void mySwap(unsigned int a, unsigned int b) {
+void mySwap(unsigned int& a, unsigned int& b) {
+    unsigned int temp;
+    temp = a;
+    a = b;
+    b = temp;
 }
 
 unsigned int getMedian(unsigned int a, unsigned int b, unsigned int c) {
     // sort local copies
+    if (b < a) mySwap(a, b);
+    if (c < a) mySwap(a, c);
+    if (c < b) mySwap(b, c);
     // return middle value
     return b;
 }
 
 Pixel** makeImage(unsigned int width, unsigned int height) {
     // throw exception if we fail to allocate memory for the image.
-    return nullptr;
+    Pixel** image;
+    image = new Pixel*[width];
+    for (unsigned int col=0; col<width; ++col) {
+        image[col] = new Pixel[height];
+        for (unsigned int row=0; row<height; ++row) {
+            image[col][row] = {0, 0, 0};
+        }
+    }
+    return image;
 }
 
 // (ifstream, image, width, height) allow images and width and height to be updated
 // we'll assume good input
-void loadImage() {
+void loadImage(ifstream& ifs, Pixel**& img, unsigned int& width, unsigned int& height) {
     // get preamble data including width and height
+    string type;
+    ifs >> type;
+    ifs >> width >> height;
+    unsigned int colorMax;
+    ifs >> colorMax;
+    img = makeImage(width, height);
+    for (unsigned int row=0; row<height; ++row) {
+        for (unsigned int col=0; col<width; ++col) {
+            ifs >> img[col][row].r;
+            ifs >> img[col][row].g;
+            ifs >> img[col][row].b;
+        }
+    }
     // allocate memory for the iamge based on width and height
 }
 
 // (ofstream, image, width, height) // prevent changing array
-void outputImage() {
+void outputImage(ofstream& ofs, const Pixel*const* img, unsigned int width, unsigned int height) {
     ofs << "P3" << endl;
     ofs << width << " " << height << endl;
     ofs << 255 << endl;
-    for (int row=0; row<height; ++row) {
-        for (int col=0; col<width; ++col) {
+    for (unsigned int row=0; row<height; ++row) {
+        for (unsigned int col=0; col<width; ++col) {
             ofs << img[col][row].r << " ";
             ofs << img[col][row].g << " ";
             ofs << img[col][row].b << " ";
@@ -70,10 +98,30 @@ int main() {
         unsigned int loadHeight = 0;
 
         // Load & create 2D arrays
+        loadImage(file1, img1, width, height);
+        loadImage(file2, img2, loadWidth, loadHeight);
+        if (width != loadWidth || height != loadHeight) {
+            return 1;
+        }
+        loadImage(file3, img3, loadWidth, loadHeight);
+        if (width != loadWidth || height != loadHeight) {
+            return 1;
+        }
 
         // Make result image
-
+        result = makeImage(width, height);
+        
         // Process out that pesky tourist
+        for (unsigned int col=0; col<width; ++col) {
+            for (unsigned int row=0; row<height; ++row) {
+                unsigned int r = getMedian(img1[col][row].r, img2[col][row].r, img3[col][row].r);
+                unsigned int g = getMedian(img1[col][row].g, img2[col][row].g, img3[col][row].g);
+                unsigned int b = getMedian(img1[col][row].b, img2[col][row].b, img3[col][row].b);
+                result[col][row] = { r, g, b };
+            }
+        }
+
+        
 
         // output result image
         outputImage(outFile, result, width, height);
