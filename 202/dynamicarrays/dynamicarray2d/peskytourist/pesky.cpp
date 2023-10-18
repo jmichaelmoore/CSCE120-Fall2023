@@ -74,7 +74,14 @@ void outputImage(ofstream& ofs, const Pixel*const* img, unsigned int width, unsi
 }
 
 // (image, what else?)
-void deleteImage() {
+void deleteImage(Pixel**& img, unsigned int& width, unsigned int& height) {
+    for (unsigned int col=0; col<width; ++col) {
+        delete [] img[col];
+    }
+    delete [] img;
+    img = nullptr;
+    width = 0;
+    height = 0;
 }
 
 int main() {
@@ -127,6 +134,18 @@ int main() {
         outputImage(outFile, result, width, height);
 
         // delete images to avoid memory leaks
+        unsigned int tWidth;
+        unsigned int tHeight;
+        tWidth = width;
+        tHeight = height;
+        deleteImage(img1, tWidth, tHeight);
+        tWidth = width;
+        tHeight = height;
+        deleteImage(img2, tWidth, tHeight);
+        tWidth = width;
+        tHeight = height;
+        deleteImage(img3, tWidth, tHeight);
+        deleteImage(result, width, height);
 
     }
     catch (...) {

@@ -34,7 +34,7 @@ Pixel** makeImage(unsigned int width, unsigned int height) {
             image[col][row] = {0, 0, 0};
         }
     }
-    return nullptr;
+    return image;
 }
 
 // (ifstream, image, width, height) allow images and width and height to be updated
@@ -73,7 +73,14 @@ void outputImage(ofstream& ofs, const Pixel*const* img, unsigned int width, unsi
 }
 
 // (image, what else?)
-void deleteImage() {
+void deleteImage(Pixel**& img, unsigned int& width, unsigned int& height) {
+    for (unsigned int col=0; col<width; ++col) {
+        delete [] img[col]; 
+    }
+    delete [] img;
+    img = nullptr;
+    width = 0;
+    height = 0;
 }
 
 int main() {
@@ -115,8 +122,8 @@ int main() {
         for (unsigned int col=0; col<width; col++) {
             for (unsigned int row=0; row<height; row++) {
                 unsigned int r = getMedian(img1[col][row].r, img2[col][row].r, img3[col][row].r);
-                unsigned int g = getMedian(img1[col][row].g, img2[col][row].r, img3[col][row].g);
-                unsigned int r = getMedian(img1[col][row].b, img2[col][row].b, img3[col][row].b);
+                unsigned int g = getMedian(img1[col][row].g, img2[col][row].g, img3[col][row].g);
+                unsigned int b = getMedian(img1[col][row].b, img2[col][row].b, img3[col][row].b);
                 result[col][row] = {r, g, b};
             }
         }
@@ -125,6 +132,18 @@ int main() {
         outputImage(outFile, result, width, height);
 
         // delete images to avoid memory leaks
+        unsigned int tWidth;
+        unsigned int tHeight;
+        tWidth = width;
+        tHeight = height;
+        deleteImage(img1, tWidth, tHeight);
+        tWidth = width;
+        tHeight = height;
+        deleteImage(img2, tWidth, tHeight);
+        tWidth = width;
+        tHeight = height;
+        deleteImage(img3, tWidth, tHeight);
+        deleteImage(result, width, height);
 
     }
     catch (...) {

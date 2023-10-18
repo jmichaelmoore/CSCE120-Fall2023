@@ -15,6 +15,31 @@ int main() {
     cout << "adding " << val << endl;
     // add values (except for 0) to the array
     // use doubling model for resizing
+    // is nums big enough, if not resize
+    if (size >= capacity) {
+      cout << "resizing" << endl;
+      cout << "size: " << size << endl;
+      cout << "capacity: " << capacity << endl;
+      // new capacity that is double
+      unsigned int newCapacity = 2 * capacity;
+      if (newCapacity == 0) {
+        newCapacity = 1;
+      }
+      // allocate memory on heap for new array
+      int* temp = new int[newCapacity];
+      // copy values
+      for (unsigned int i=0; i<size; i++) {
+        temp[i] = nums[i];
+      }
+      // delete old memory
+      delete [] nums;
+      // updates
+      nums = temp;
+      capacity = newCapacity;
+    }
+    // add value
+    nums[size] = val;
+    size++;
   }
   printAry(nums, size);
   delete[] nums;
