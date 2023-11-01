@@ -104,3 +104,28 @@ void Date::setYear(int year) {
 	else
 		throw runtime_error("Invalid Year");
 }
+
+  // add ==
+	bool Date::operator==(const Date& rhs) {
+		return (this->year == rhs.year) &&
+			   (this->month == rhs.month) &&
+			   (this->day == rhs.day);
+	}
+
+  // add <
+	bool Date::operator<(const Date& rhs) {
+		if (this->year < rhs.year) {
+			return true;
+		} else if (this->year == rhs.year) {
+			if (this->month < rhs.month) {
+				return true;
+			}
+			else if (this->month == rhs.month) {
+				if (this->day < rhs.day) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+  // rhs right hand side     lhs left hand side

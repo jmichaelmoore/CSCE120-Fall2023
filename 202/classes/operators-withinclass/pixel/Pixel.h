@@ -19,9 +19,13 @@ public:
     void setBlue(unsigned short blue);
     unsigned short getBlue();
     // add =
+    Pixel& operator=(const Pixel& rhs);
     // add +
+    Pixel operator+(const Pixel& rhs);
     // add - (unary)
+    Pixel& operator-();
     // add ==
+    bool operator==(const Pixel& rhs);
 };
 
 #endif

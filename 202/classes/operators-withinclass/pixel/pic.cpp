@@ -28,8 +28,6 @@ int main() {
     a.setGreen(100);
     printPixel("a", a);
 
-/*
-
     cout << "Pixel d = a";
     Pixel d = a;
     printPixel("d", d);
@@ -59,5 +57,5 @@ int main() {
     printPixel("d", d);
     printPixel("c", c);
     cout << "c == d: " << std::boolalpha << (c==d) << endl;
-*/
+
 }
