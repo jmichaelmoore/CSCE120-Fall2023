@@ -13,7 +13,7 @@ int main() {
   cout << "c: " << c.to_string() << endl;
 
   cout << "a == b: " << std::boolalpha << (a == b) << endl;
-  cout << "a == d: " << std::boolalpha << (a == c) << endl;
+  cout << "a == c: " << std::boolalpha << (a == c) << endl;
   cout << "a < b: " << std::boolalpha << (a < b) << endl;
   cout << "b < a: " << std::boolalpha << (b < a) << endl;
   cout << "a < c: " << std::boolalpha << (a < c) << endl;

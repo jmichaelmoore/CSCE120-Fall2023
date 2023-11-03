@@ -3,7 +3,7 @@
 
 using std::cout, std::endl, std::string;
 
-void printPixel(string identifier, Pixel& p ) {
+void printPixel(string identifier, const Pixel& p ) {
     cout << identifier << " (red): " << p.getRed() << endl;
     cout << identifier << " (green): " << p.getGreen() << endl;
     cout << identifier << " (blue): " << p.getBlue() << endl;
@@ -57,5 +57,7 @@ int main() {
     printPixel("d", d);
     printPixel("c", c);
     cout << "c == d: " << std::boolalpha << (c==d) << endl;
+
+    cout << "c: " << c << endl;
 
 }
