@@ -27,11 +27,21 @@ int main() {
   ary2.push_back("wow");
 
   printArray(ary2);
+
+  DynamicArray<int> ary3 = ary1; // copy constructor
+
+  printArray(ary1);
+
+  DynamicArray<int> ary4;
+  ary4 = ary1; // copy assignment
+  printArray(ary4);
 }
 
 template <typename T>
 void printArray(const DynamicArray<T>& ary) {
   cout << endl << "array: " << endl;
+  cout << "   size: " << ary.size() << endl;
+  cout << "   capacity: " << ary.capacity() << endl;
   if (ary.empty()) {
     cout << "Empty!" << endl;
   }
