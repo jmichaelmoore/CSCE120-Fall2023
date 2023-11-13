@@ -16,6 +16,7 @@ public:
     DynamicArray() : ary(nullptr), size_(0), capacity_(0) {}
     DynamicArray(size_t size, T val);
     DynamicArray(const DynamicArray& src);
+    DynamicArray(DynamicArray&& src);
     ~DynamicArray();
     size_t size() const { return size_; }
     size_t capacity() const { return capacity_; }
@@ -23,8 +24,48 @@ public:
     T at(size_t index) const;
     T& at(size_t index);
     DynamicArray& operator=(const DynamicArray& src);
+    DynamicArray& operator=(DynamicArray&& src);
     void push_back(T val);
+    void swap(DynamicArray& src);
 };
+
+template <typename T>
+DynamicArray<T>::DynamicArray(DynamicArray&& src) :
+        ary(src.ary), size_(src.size_), capacity_(src.capacity_) {
+    src.ary = nullptr;
+    src.size_ = 0;
+    src.capacity_ = 0;
+}
+
+template <typename T>
+DynamicArray<T>& DynamicArray<T>::operator=(DynamicArray&& src) {
+    if (this != &src) {
+        this->clear();
+        this->ary = src.ary;
+        this->size_ = src.size_;
+        this->capacity_ = src.capacity_;
+        src.ary = nullptr;
+        src.size_ = 0;
+        src.capacity_ = 0;
+    }
+    return *this;
+}
+
+template <typename T>
+void DynamicArray<T>::swap(DynamicArray& src) {
+    //DynamicArray<T> temp = *this;
+    //*this = src;
+    //src = temp;
+    T* temp = this->ary;
+    size_t size = this->size_;
+    size_t capacity = this->capacity_;
+    this->ary = src.ary;
+    this->size_ = src.size_;
+    this->capacity_ = src.capacity_;
+    src.ary = temp;
+    src.size_ = size;
+    src.capacity_ = capacity;
+}
 
 template <typename T>
 void DynamicArray<T>::copy(const DynamicArray& src) {

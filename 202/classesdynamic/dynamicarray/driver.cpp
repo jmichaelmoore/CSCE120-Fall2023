@@ -35,6 +35,36 @@ int main() {
   DynamicArray<int> ary4;
   ary4 = ary1; // copy assignment
   printArray(ary4);
+
+  cout << "swap before" << endl;
+
+  DynamicArray<int> ary5(3,7);
+  cout << "ary4" << endl;
+  printArray(ary4);
+  cout << "ary5" << endl;
+  printArray(ary5);
+  ary4.swap(ary5);
+  cout << "swap after" << endl;
+  cout << "ary4" << endl;
+  printArray(ary4);
+  cout << "ary5" << endl;
+  printArray(ary5);
+
+  cout << "move assignment 4 & 5" << endl;
+  ary4 = std::move(ary5);
+  cout << "ary4" << endl;
+  printArray(ary4);
+  cout << "ary5" << endl;
+  printArray(ary5);
+
+ cout << "move constructor ary6 = ary4" << endl;
+
+  DynamicArray<int> ary6 = std::move(ary4);
+  cout << "ary4" << endl;
+  printArray(ary4);
+  cout << "ary6" << endl;
+  printArray(ary6);
+
 }
 
 template <typename T>

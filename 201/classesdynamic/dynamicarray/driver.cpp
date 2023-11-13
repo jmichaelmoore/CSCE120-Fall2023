@@ -34,12 +34,43 @@ int main() {
 
   printArray(ary4);
 
+  cout << "copy assignment" << endl;
   ary4 = ary1; // calls copy assignment
 
   printArray(ary4);
 
+  DynamicArray<int> ary5;
+  ary5.push_back(3);
+  ary5.push_back(5);
+  ary5.push_back(7);
 
+ cout << "swap before" << endl;
 
+  cout << "ary4" << endl;
+  printArray(ary4);
+  cout << "ary5" << endl;
+  printArray(ary5);
+
+  ary5.swap(ary4);
+  cout << "swap after" << endl;
+
+  cout << "ary4" << endl;
+  printArray(ary4);
+  cout << "ary5" << endl;
+  printArray(ary5);
+
+  DynamicArray<int> ary6 = std::move(ary5);
+  cout << "ary5" << endl;
+  printArray(ary5);
+  cout << "ary6" << endl;
+  printArray(ary6);
+
+  ary6 = std::move(ary4);
+  cout << "move assignment" << endl;
+cout << "ary4" << endl;
+  printArray(ary4);
+  cout << "ary6" << endl;
+  printArray(ary6);
 
   // declare/define double version  
 }
