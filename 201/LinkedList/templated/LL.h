@@ -21,8 +21,8 @@ class LL {
 
 public:
   // constructors
-  LL(); // default constructor
-  LL(T data);
+  LL() : head(nullptr), tail(nullptr) {} // default constructor
+  LL(const T& data);
   LL(const LL&); // copy constructor
   LL(LL&&); // move constructor
 
@@ -45,5 +45,48 @@ public:
 
   void print(std::ostream& = std::cout) const; // T must support << operator
 };
+
+template <typename T> 
+ LL<T>::LL(const T& data) : head(nullptr), tail(nullptr) {
+  Node<T>* newNode = new Node<T>(data);
+  head = newNode;
+  tail = newNode;
+ }
+
+template <typename T>
+void LL<T>::insertFront(const T& data) {
+  Node<T>* newNode = new Node<T>(data);
+  newNode->next = head;
+  head = newNode;
+  if (tail==nullptr) {
+    tail = newNode;
+  }
+}
+
+template <typename T>
+void LL<T>::insertBack(const T& data) {
+  Node<T>* newNode = new Node<T>(data);
+  if (tail == nullptr) { // empty list
+    head = newNode;
+    tail = newNode;
+    return;
+  }
+  // tail is nollptr
+  tail->next = newNode; 
+  tail = newNode;
+}
+
+template <typename T>
+void LL<T>::print(std::ostream& os) const {
+  // traversal
+  Node<T>* cur = head;
+  if (cur == nullptr) {
+    cout << "Empty List!" << endl;
+  }
+  while (cur != nullptr) {
+    os << cur->data << endl;
+    cur = cur->next;
+  }
+}
 
 #endif
