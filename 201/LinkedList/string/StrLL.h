@@ -24,7 +24,7 @@ public:
 
     // setters and getters
     void insertFront(char);
-    void insertTail(char);
+    void insertBack(char);
     void insertAfter(char, char);
     void insertBefore(char, char);
 
