@@ -9,6 +9,7 @@ public:
     Node* next;
     Node* prev;
     Node() : letter('\0'), next(nullptr), prev(nullptr) {}
+    Node(char c) : letter(c), next(nullptr), prev(nullptr) {}
 };
 
 #endif
