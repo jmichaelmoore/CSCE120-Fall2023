@@ -3,8 +3,6 @@
 
 #include <iostream>
 
-using std::cout, std::endl;
-
 template <typename T>
 struct Node {
   T data;
@@ -81,10 +79,10 @@ void LL<T>::print(std::ostream& os) const {
   // traversal
   Node<T>* cur = head;
   if (cur == nullptr) {
-    cout << "Empty List!" << endl;
+    cout << "Empty List!" << std::endl;
   }
   while (cur != nullptr) {
-    os << cur->data << endl;
+    os << cur->data << std::endl;
     cur = cur->next;
   }
 }

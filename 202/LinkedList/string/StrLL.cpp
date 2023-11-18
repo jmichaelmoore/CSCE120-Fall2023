@@ -3,7 +3,7 @@
 #include "Node.h"
 
 void StrLL::printReverse(std::ostream& os) {
-    Node* cur = head;
+    Node* cur = tail;
     while (cur != nullptr) {
         os << cur->letter;
         cur = cur->prev;

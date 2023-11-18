@@ -3,8 +3,6 @@
 
 #include <iostream>
 
-using std::cout, std::endl;
-
 template <typename T>
 struct Node {
   T data;
@@ -50,10 +48,10 @@ template <typename T>
 void LL<T>::print(std::ostream& os) const {
   Node<T>* cur = head;
   if (cur == nullptr) {
-    os << "Empty List!" << endl;
+    os << "Empty List!" << std::endl;
   }
   while (cur != nullptr) {
-    os << cur->data << endl;
+    os << cur->data << std::endl;
     cur = cur->next;
   }
 }
