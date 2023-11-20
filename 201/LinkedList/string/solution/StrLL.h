@@ -38,6 +38,7 @@ public:
     void printReverse(std::ostream& = std::cout);
 private:
     Node* find(char);
+    const Node* find(char) const;
 };
 
 #endif

@@ -2,6 +2,132 @@
 #include "StrLL.h"
 #include "Node.h"
 
+void StrLL::remove(char val) {
+  // remove the first instance of val from the linked list
+  // if the val does not exist, we could throw an exception, but we'll just do nothing
+  if (head == nullptr) { // check for empty list
+    return;
+  }
+  Node* cur = head;
+  while (cur != nullptr && (cur->letter != val)) {
+    // boolean short circuit in while conditional
+    //   order is important! we must check for nullptr before derferencing cur
+    cur = cur->next;
+  }
+  // exit the loop because either reached end of list or found node with val
+  // check to see which reason
+  if (cur != nullptr) {  // cur points to node to delete
+    if (cur->next == nullptr) { // removing tail, so update tail
+      tail = tail->prev; // prev will be nullptr when removing single node from list
+    }
+    else {
+        cur->next->prev = cur->prev;
+    }
+    if (cur->prev == nullptr) { // could also check if head == cur
+      // removing head, so update head
+      head = head->next; // head will be nullptr when removing a single node from the list
+    }
+    else { // cur->prev points to a node
+      cur->prev->next = cur->next;
+    }
+    delete cur;
+  }
+  // else did not find val so do nothing
+
+}
+
+void StrLL::insertAfter(char valToFind, char valToInsert) {
+  // find the first instance of valToFind and insert valToInsert after it
+  // if we don't find val, we will insert at the end of the list
+  if (head == nullptr) { // check for empty list empty list
+    insertFront(valToInsert);
+    return;
+  }
+  Node* cur = head;
+  while (cur != nullptr && (cur->letter != valToFind)) {
+    // boolean short circuit in while conditional
+    //   order is important! we must check for nullptr before derferencing cur
+    cur = cur->next;
+  }
+  // exit the loop because either reached end of list or found node with val
+  // check to see which reason 
+  if (cur == nullptr || cur == tail) { // reached end of list without finding val or node is the tail
+    insertBack(valToInsert); // take advantage of my existing function
+  }
+  else { // found node to insert after that is not the tail
+    Node* newNode = new Node(valToInsert);
+    newNode->next = cur->next;
+    newNode->prev = cur;
+    cur->next = newNode;
+    newNode->next->prev = newNode;
+    if (cur == tail) { // we have a new tail
+      tail = newNode;
+    }
+  }
+  // will never be a new head
+}
+
+void StrLL::insertBefore(char valToFind, char valToInsert) {
+  // find the first instance of valToFind and insert valToInsert before it
+  // if we don't find val, we will insert at the beginning of the list
+  if (head == nullptr) { // check for empty list empty list
+    insertFront(valToInsert);
+    return;
+  }
+  Node* cur = head;
+  while (cur != nullptr && (cur->letter != valToFind)) {
+    // boolean short circuit in while conditional
+    //   order is important! we must check for nullptr before derferencing cur
+    cur = cur->next;
+  }
+  // exit the loop because either reached end of list or found node with val
+  // check to see which reason 
+  if (cur == nullptr || cur == head) { // new head
+    // reached end of list without finding val OR val is the first item in the list
+    insertFront(valToInsert); // take advantage of my existing function
+  }
+  else { // found node to insert before that is not the head
+    Node* newNode = new Node(valToInsert);
+    newNode->next = cur;
+    newNode->prev = cur->prev;
+    cur->prev = newNode;
+    newNode->prev->next = newNode;
+    if (head == cur) { // new head
+        head = newNode;
+    }
+    // will never be a new tail
+  }
+}
+
+bool StrLL::hasChar(char val) const { // T must support == operator
+  return (nullptr != find(val));
+}
+
+Node* StrLL::find(char val) {
+  // return nullptr if not found
+  Node* cur = head;
+  while (cur != nullptr) {
+    if (cur->letter == val) {
+      return cur;
+    }
+    cur = cur->next;
+  }
+  // if we get out of the loop, we did not find val
+  return nullptr;
+}
+
+const Node* StrLL::find(char val) const {
+  Node* cur = head;
+  while (cur != nullptr) {
+    if (cur->letter == val) {
+      return cur;
+    }
+    cur = cur->next;
+  }
+  // if we get out of the loop, we did not find val
+  return nullptr;
+}
+
 void StrLL::print(std::ostream& os) {
     Node* cur = head;
     while (cur != nullptr) {
