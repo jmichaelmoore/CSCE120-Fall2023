@@ -55,4 +55,13 @@ int main() {
   ll2.remove(9);
   cout << "ll2: " << endl;
   ll2.print();
+
+  LL<int> ll3 = ll1;
+  cout << "ll3: " << endl;
+  ll3.print();
+
+  ll2 = ll3;
+  cout << "ll2: " << endl;
+  ll2.print();
+
 }

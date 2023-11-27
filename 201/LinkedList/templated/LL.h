@@ -16,6 +16,7 @@ class LL {
   Node<T>* tail;
   
   Node<T>* find(const T&) const; // T must support == operator
+  void copy(const LL& src);
 
 public:
   // constructors
@@ -24,7 +25,7 @@ public:
   LL(const LL&); // copy constructor
   LL(LL&&); // move constructor
 
-  //~LL(); // destructor  // uncomment when ready to implement
+  ~LL(); // destructor  // uncomment when ready to implement
 
   LL& operator=(const LL&); // copy assignment
   LL& operator=(LL&&); // move assignment
@@ -43,6 +44,70 @@ public:
 
   void print(std::ostream& = std::cout) const; // T must support << operator
 };
+
+template <typename T>
+LL<T>& LL<T>::operator=(LL&& src) {
+  if (this != &src) {
+    this->clear();
+    this->head = src.head;
+    this->tail = src.tail;
+    src.head = nullptr;
+    src.tail = nullptr;
+  }
+  return *this;
+}
+
+template <typename T>
+LL<T>::LL(LL&& src) {
+  this->head = src.head;
+  this->tail = src.tail;
+  src.head = nullptr;
+  src.tail = nullptr;
+}
+
+template <typename T>
+void LL<T>::copy(const LL& src) {
+  if (src.head == nullptr) { return; }
+  this->head = new Node(src.head->data);
+  this->tail = head;
+  Node<T>* cur = src.head->next;
+  while (cur != nullptr) {
+    Node<T>* newNode = new Node<T>(cur->data);
+    this->tail->next = newNode;
+    this->tail = newNode;
+    cur = cur->next;
+  }
+}
+
+template <typename T>
+LL<T>& LL<T>::operator=(const LL& src) { // copy assignment
+  if (this != &src) {
+    clear();
+    copy(src);
+  }
+  return *this;
+}
+
+template <typename T>
+LL<T>::LL(const LL& src) : head(nullptr), tail(nullptr) {
+  copy(src);
+}
+
+template <typename T>
+void LL<T>::clear() {
+  while (head != nullptr) {
+    Node<T>* delNode = head;
+    head = head->next;
+    delete delNode;
+    delNode = nullptr;
+  }
+  tail = nullptr;
+}
+
+template <typename T>
+LL<T>::~LL() {
+  clear();
+}
 
 template <typename T>
 void LL<T>::remove(const T& val) {
