@@ -2,6 +2,59 @@
 #include "StrLL.h"
 #include "Node.h"
 
+StrLL::StrLL(const char* src) : head(nullptr), tail(nullptr) {
+  size_t index = 0;
+  if (src[index] == '\0') { return; }
+  Node* head = new Node(src[0]);
+  tail = head;
+  index++;
+  while (src[index] != '\0') {
+    Node* newNode = new Node(src[index]);
+    newNode->prev = tail;
+    tail->next = newNode;
+    tail = newNode;
+    index++;
+  }
+}
+
+void StrLL::copy(const StrLL& src) {
+  if (src.head == nullptr) { return; }
+  head = new Node(src.head->letter);
+  tail = head;
+  Node* cur = src.head->next;
+  while (cur != nullptr) {
+    Node* newNode = new Node(cur->letter);
+    tail->next = newNode;
+    newNode->prev = tail;
+    tail = newNode;
+  }
+}
+
+StrLL& StrLL::operator=(const StrLL& src) {
+  if (this != &src) {
+    this->clear();
+    this->copy(src);
+  }
+  return *this;
+}
+
+StrLL::StrLL(const StrLL& src) : head(nullptr), tail(nullptr) {
+  copy(src);
+}
+
+void StrLL::clear() {  while (head != nullptr) {
+    Node* delNode = head;
+    head = head->next;
+    delete delNode;
+    delNode = nullptr;
+  }
+  tail = nullptr;
+}
+
+StrLL::~StrLL() {
+  clear();
+}
+
 void StrLL::remove(char val) {
   // remove the first instance of val from the linked list
   // if the val does not exist, we could throw an exception, but we'll just do nothing

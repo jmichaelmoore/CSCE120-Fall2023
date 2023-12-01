@@ -131,4 +131,21 @@ int main() {
     cout << "-";
     s2.printReverse();
     cout << "-" << endl << endl;
+
+    StrLL s3("Hello");
+    cout << "-";
+    s3.print();
+    cout << "-" << endl;
+    cout << "-";
+    s3.printReverse();
+    cout << "-" << endl << endl;
+
+    StrLL s4 = s3;
+    cout << "-";
+    s4.print();
+    cout << "-" << endl;
+    cout << "-";
+    s4.printReverse();
+    cout << "-" << endl << endl;
+
 }
